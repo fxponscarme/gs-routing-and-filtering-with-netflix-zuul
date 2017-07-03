@@ -75,6 +75,7 @@ You can use any REST client, but look at some examples using `curl`:
 - @RequestMapping(value = "/checked-out")
 - @SpringBootApplication
 - @EnableZuulProxy
+- @Bean
 
 #### Related annotation
 - @Configuration
