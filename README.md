@@ -1,50 +1,35 @@
 # gs-routing-and-filtering-with-netflix-zuul
 
+This is a repository for future reference about how to route and filter requests to a Spring Boot microservice application using the Netflix Zuul edge service library.
 
+It was based in [Routing and Filtering](https://spring.io/guides/gs/routing-and-filtering/) tutorial.
 
-This is a simple repository for future reference about how to build an application with Spring Boot that accesses relational JPA (Java Persistence API) data through a hypermedia-based RESTful front end.
-
-It was based in [Accessing JPA Data with REST](https://spring.io/guides/gs/accessing-data-rest/) tutorial.
-
-### Instructions to run the application
+### Instructions to run the 'book microservice' and 'gateway'
 1. Clone this repository
-2. So, you must choose **one** of the four alternatives bellow to build and run the application:
+2. So, go to the project root folder and type `cd book`
+3. You must choose **one** of the four alternatives bellow to build and run the book microservice:
     1. Alternative 1: If you prefer to use Gradle, run the command `./gradlew bootRun` on root folder
-    2. Alternative 2: Or you can build the JAR file using `./gradlew build` and then running the JAR file<br /> `java -jar build/libs/gs-spring-boot-accessing-data-rest-0.1.0.jar`
+    2. Alternative 2: Or you can build the JAR file using `./gradlew build` and then running the JAR file<br /> `java -jar build/libs/book-0.0.1-SNAPSHOT.jar`
     3. Alternative 3: If you prefer to use Maven, run the command `./mvnw spring-boot:run` also on root folder
-    4. Alternative 4: Or you can yet build the JAR file using `./mvnw clean package` and then running the JAR file<br /> `java -jar target/gs-spring-boot-accessing-data-rest-0.1.0.jar`
-3. After this, the service is up. If you visit http://localhost:8080/ you will get a first glimpse of what this server has to offer.
+    4. Alternative 4: Or you can yet build the JAR file using `./mvnw clean package` and then running the JAR file<br /> `java -jar target/book-0.0.1-SNAPSHOT.jar`
+4. After this, the microservice is up. If you visit http://localhost:8090/available you will get a message like this: "*Spring in Action*".
 
-### Some good requests to do:
-
-You can use any REST client, but look at some examples using `curl`:
-
-- The base endpoint:<br />`curl http://localhost:8080`
-
-- Get all people:<br />`curl http://localhost:8080/people`
-
-- Add a new person:<br />`curl -i -X POST -H "Content-Type:application/json" -d "{  \"firstName\" : \"Frodo\",  \"lastName\" : \"Baggins\" }" http://localhost:8080/people`
-
-- Get a person:<br />`curl http://localhost:8080/people/1`
-
-- The search base endpoint:<br />`curl http://localhost:8080/people/search`
-
-- Search for people by last name:<br />`curl http://localhost:8080/people/search/findByLastName?name=Baggins`
-
-- Edit a person:<br />`curl -X PUT -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo\", \"lastName\": \"Baggins\" }" http://localhost:8080/people/1`
-
-- Partially edit a person:<br />`curl -X PATCH -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo Jr.\" }" http://localhost:8080/people/1`
-
-- Delete a person:<br />`curl -X DELETE http://localhost:8080/people/1`
-
+5. So, open another terminal in the project root again and type `cd gateway`
+6. You must choose **one** of the four alternatives bellow to build and run the gateway:
+    1. Alternative 1: If you prefer to use Gradle, run the command `./gradlew bootRun` on root folder
+    2. Alternative 2: Or you can build the JAR file using `./gradlew build` and then running the JAR file<br /> `java -jar build/libs/gateway-0.0.1-SNAPSHOT.jar`
+    3. Alternative 3: If you prefer to use Maven, run the command `./mvnw spring-boot:run` also on root folder
+    4. Alternative 4: Or you can yet build the JAR file using `./mvnw clean package` and then running the JAR file<br /> `java -jar target/gateway-0.0.1-SNAPSHOT.jar`
+7. After this, the microservice is up. If you visit http://localhost:8080/books/available you will get a message like this: "*Spring in Action*". And note into the terminal some logged messages like this:
+>2017-07-03 13:56:34.005  INFO 65929 --- [nio-8080-exec-2] hello.filters.pre.SimpleFilter           : GET request to http://localhost:8080/books/available
 
 ### About development environment
 
 - Java 1.8.0_25
-- Spring Boot 1.5.2
+- Spring Boot 1.4.0
 - Gradle 4.0
 - Groovy 2.4.11
-- Gradle Wrapper 2.13
+- Gradle Wrapper 2.9
 - Ant 1.9.6
 - Apanche Maven 3.5.0
 - POM Model 4.0.0
@@ -57,15 +42,11 @@ You can use any REST client, but look at some examples using `curl`:
 
 ## Some concepts
 
-**Spring Data REST** - Exports Spring Data repositories as hypermedia-driven RESTful resources. Spring Data REST takes the features of Spring HATEOAS and Spring Data JPA and combines them together automatically. Spring Data REST uses the [HAL format](http://stateless.co/hal_specification.html) for JSON output.
+**Netflix Zuul** - Zuul is a gateway service that provides dynamic routing, monitoring, resiliency, security, and more.
 
-**Spring Data JPA** - Makes it easy to implement JPA-based repositories.
+**Reverse Proxy** -
+> "In computer networks, a reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client like they originated from the Web server itself. Contrary to a forward proxy, which is an intermediary for its associated clients to contact any server, a reverse proxy is an intermediary for its associated servers to be contacted by any client."" ([Reverse Proxy @wikipedia](https://en.wikipedia.org/wiki/Reverse_proxy))
 
-**Spring HATEOAS** - Create REST representations that follow the HATEOAS principle from your Spring-based applications.
-
-**Spring Data Commons** - Core Spring concepts underpinning every Spring Data project.
-
-**HAL format** - HAL (Hypertext Application Language) is a simple format that gives a consistent and easy way to hyperlink between resources in your API.
 
 ## Some other details
 
