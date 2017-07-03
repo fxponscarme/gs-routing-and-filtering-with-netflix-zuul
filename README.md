@@ -66,8 +66,11 @@ It was based in [Routing and Filtering](https://spring.io/guides/gs/routing-and-
 
 #### Annotations used on test case
 - @RunWith(SpringRunner.class)
-- @SpringBootTest
-- @AutoConfigureMockMvc
+- @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+- @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT, classes = GatewayApplication.class)
 - @Autowired
+- @BeforeClass
+- @AfterClass
 - @Before
 - @Test
+- @Rule
